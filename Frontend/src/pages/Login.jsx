@@ -11,7 +11,7 @@ function Login() {
 
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8080/api/auth/login",{   
+    const response = await fetch("https://ankit-chat-gpt.onrender.com/api/auth/login",{   
           method:"POST",
 
         headers:{
