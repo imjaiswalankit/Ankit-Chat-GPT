@@ -1,6 +1,7 @@
 import express from "express";
 import Thread from "../models/Thread.js";
 import getGeminiAPIResponse from "../utils/gemini.js";
+import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -20,7 +21,7 @@ router.post("/test", async(req, res)=>{
 })
 
 //Get all Threads
-router.get("/thread",async(req, res)=>{  // browser ya frontend ko req sned kre
+router.get("/thread",auth, async(req, res)=>{  // browser ya frontend ko req sned kre
     try {
        const threads =  await Thread.find({}).sort({updatedAt: -1});  //db se thread ko fetch krne k liy, thread lane k liy
         // {updatedAt: -1} iiska mtlb h desending order mein update krna 
@@ -35,7 +36,7 @@ router.get("/thread",async(req, res)=>{  // browser ya frontend ko req sned kre
     })
 
 // Get ThreadID -> 
-router.get("/thread/:threadId",async( req, res)=>{
+router.get("/thread/:threadId",auth, async( req, res)=>{
     const {threadId} = req.params; // aapni threadID ko parameter se fetch krenge 
 
     try{
@@ -53,7 +54,7 @@ router.get("/thread/:threadId",async( req, res)=>{
 
 // Del routes
 
-router.delete("/thread/:threadId",async(req, res)=>{
+router.delete("/thread/:threadId",auth, async(req, res)=>{
       const {threadId} = req.params;
     try {
         const deletedThread = await Thread.findOneAndDelete({threadId}) ;
@@ -69,7 +70,7 @@ router.delete("/thread/:threadId",async(req, res)=>{
 
 // Post/Chat route (post request for our chat )
 
-router.post("/chat", async(req, res)=>{
+router.post("/chat", auth,  async(req, res)=>{
     const {threadId, message} = req.body;
       
     if(!threadId || !message) {  // check if threadid or msg nhi h too msg send

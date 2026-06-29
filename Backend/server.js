@@ -1,43 +1,15 @@
-// import OpenAI from 'openai';
-// import 'dotenv/config';
+import dns from "node:dns";
 
-// const client = new OpenAI({
-//   apiKey: process.env.OPENAI_API_KEY, // This is the default and can be omitted
-// });
-
-// const response = await client.responses.create({
-//   model: 'gpt-4o-mini',
-//   instructions: 'You are a coding assistant that talks like a pirate',
-//   input: 'Joke related to Computer Science',
-// });
-
-// // console.log(response.output_text);
-// console.log(process.env.OPENAI_API_KEY);
-
-// 1st method api call
-
-// import { GoogleGenAI } from "@google/genai";
-// import "dotenv/config";
-
-// const client = new GoogleGenAI({
-//   apiKey: process.env.GEMINI_API_KEY,
-// });
-
-// const response = await client.models.generateContent({
-//   model: "gemini-2.5-flash",
-//   contents: "Joke related to Computer Science",
-// });
-
-// console.log(response.text);
-
-
-// -> 2nd method for api call fetc
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 import express from 'express';
 import "dotenv/config";
 import cors from "cors";
 import mongoose from 'mongoose';
-import chatRoutes from "./routes/chat.js"
+
+import chatRoutes from "./routes/chat.js";
+import authRoutes from "./routes/auth.js";
+
 console.log("Gemini Key:", process.env.GEMINI_API_KEY);
 
 
@@ -47,9 +19,13 @@ const PORT = 8080;
 app.use(express.json());  // use for pars our incoming request (miiddle ware )frontend se aap fetch ka use karke JSON data bhejte ho, toh server ko wo data samajh nahi aata. Ye line server ko wo data parse (read) karne mein help karti hai. Agar ye line nahi likhoge, toh req.body humesha undefined milega.
 app.use(cors());
 
+// Routes
+
 app.use("/api",chatRoutes);
+app.use("/api/auth", authRoutes);
 
 // Database Connection Function
+
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
@@ -64,47 +40,3 @@ app.listen(PORT, ()=>{
     console.log(`server running on ${PORT}`);
     connectDB();
 });
-
-
-// app.post("/test", async(req, res)=>{
-    
-//     const {message} = req.body;
-
-//      const options = {
-//         method: "POST",
-//         headers: {
-//             "content-Type" : "application/json",
-//             // "Authorization": `Bearer ${process.env.GEMINI_API_KEY}`
-//         },
-//         // body: JSON.stringify({
-//         // model: "gemini-2.5-flash",
-//         // messages: [{
-//         //     role: "user",
-//         //     content: "Hello!"
-//         // }]
-//         // })  
-//         // gemini mein meesages k place par contents and parts use hota h
-//          body: JSON.stringify({
-//           contents: [
-//         {
-//           parts: [
-//             {
-//               text: message,
-//             },
-//           ],
-//         },
-//       ],
-//     }),
-//      }
-
-//     try {
-//          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, options);
-//          const data = await response.json();
-//         //  console.log(data);
-//         res.send({ reply: data.candidates[0].content.parts[0].text, });       
-       
-//     } catch(err){
-//         console.log(err);
-//     }
-// })
-// console.log(process.env.GEMINI_API_KEY);

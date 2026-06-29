@@ -1,66 +1,180 @@
 .chats {
-
-    max-width: 700px;
-    overflow: scroll;
-    padding: 8rem;;
-
+    max-width: 780px;
+    margin: auto;
+    padding: 2rem 1.25rem 6rem;
+    height: 100vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
 }
-/* .chats{
-    max-width: 700px;
-    height: 70vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    padding: 1rem;
-} */
 
-/* ScrollDown Effect - */
-
-.chats::-webkit-scrollbar{
+/* Scrollbar */
+.chats::-webkit-scrollbar {
     width: 6px;
 }
 
-.chats::-webkit-scrollbar-track{
+.chats::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.chats::-webkit-scrollbar-thumb{
+.chats::-webkit-scrollbar-thumb {
     background: #555;
     border-radius: 5px;
 }
 
-.chats::-webkit-scrollbar-thumb:hover{
+.chats::-webkit-scrollbar-thumb:hover {
     background: #777;
 }
 
-.userDiv {
-     
-    display: flex;
-    justify-content: flex-end;
-    font-size: 0.9rem;
+.newChatTitle {
+    text-align: center;
+    color: #e5e5e5;
+    margin-top: 2rem;
 }
 
+/* Common message row */
+.userDiv,
 .gptDiv {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1.25rem;
+}
 
-    text-align: left;
+/* User message right aligned */
+.userDiv {
+    justify-content: flex-end;
+}
+
+/* Assistant message left aligned */
+.gptDiv {
+    justify-content: flex-start;
+}
+
+/* User bubble */
+.userMessage {
+    background-color: #323232;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 18px;
+    max-width: 75%;
+    width: fit-content;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* Assistant bubble */
+.assistantMessage {
+    width: 100%;
+    max-width: 680px;
+    color: #f5f5f5;
+    line-height: 1.75;
+    font-size: 0.97rem;
+    padding: 0.25rem 0;
+    word-break: break-word;
+}
+
+/* Markdown spacing */
+
+.markdown-body {
+    max-width: 680px;
+}
+
+.markdown-body p {
+    margin: 0 0 1rem 0;
+}
+
+
+.markdown-body ul,
+.markdown-body ol{
+    padding-left:1.4rem;
+    margin:1rem 0;
+}
+
+.markdown-body li{
+    text-align:left;
+}
+
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4 {
+    margin: 1.2rem 0 0.8rem;
+    line-height: 1.35;
+    color: #ffffff;
+}
+
+.markdown-body strong {
+    color: #ffffff;
+}
+
+.markdown-body code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.2rem 0.4rem;
+    border-radius: 6px;
     font-size: 0.9rem;
 }
 
-.userMessage {
+.markdown-body pre {
+    background: transparent;
+    margin: 1rem 0;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    
+}
 
-    background-color: #323232;
-    padding: 10px 20px;
+.markdown-body pre code {
+    display: block;
+    padding: 1rem;
     border-radius: 14px;
-    margin-left: 15rem;
-    max-width: 500px;
-    width: fix-content;
+    background: #0d1117;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.6;
 }
 
 .hljs {
-
     border-radius: 14px !important;
-
 }
-pre {
 
-    white-space: pre-wrap ;
+/* Tables if markdown returns table */
+.markdown-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.markdown-body th,
+.markdown-body td {
+    border: 1px solid #444;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+.markdown-body blockquote {
+    margin: 1rem 0;
+    padding-left: 1rem;
+    border-left: 4px solid #555;
+    color: #cfcfcf;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .chats {
+        padding: 1rem 0.9rem 5rem;
+        max-width: 100%;
+    }
+
+    .userMessage {
+        max-width: 88%;
+        font-size: 0.92rem;
+    }
+
+    .assistantMessage {
+        max-width: 100%;
+        font-size: 0.94rem;
+    }
 }

@@ -11,7 +11,11 @@ function Sidebar(){
     const getAllThreads = async () =>{
 
       try {
-        const response = await fetch("http://localhost:8080/api/thread");
+             const response = await fetch("http://localhost:8080/api/thread",{
+              headers:{
+                        Authorization:`Bearer ${localStorage.getItem("token")}`
+                      }
+});      
         const res = await response.json();
         const filterData = res.map(thread =>({threadId: thread.threadId, title: thread.title}));
         console.log(filterData);
@@ -44,8 +48,12 @@ function Sidebar(){
           setCurrThreadId(newThreadId);
 
           try {
-            const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`);
-            const res = await response.json();
+                const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`,{
+                headers:{
+                             Authorization:`Bearer ${localStorage.getItem("token")}`
+                         }
+          });          
+           const res = await response.json();
             console.log(res);
             setPrevChats(res);
             setNewChat(false);
@@ -59,7 +67,14 @@ function Sidebar(){
 
     const deleteThread = async (threadId) =>{
           try {
-          const response =await fetch(`http://localhost:8080/api/thread/${threadId}`,{ method: "DELETE"});
+                const response = await fetch(  `http://localhost:8080/api/thread/${threadId}`,
+                  {
+                     method:"DELETE",
+                          headers:{
+                                     Authorization:`Bearer ${localStorage.getItem("token")}`
+                                  }
+                   }
+);         
           const res = await response.json();
           console.log(res);
 
@@ -76,6 +91,18 @@ function Sidebar(){
               console.log(err);
           }
     }
+
+    //  Logout button k liy 
+    
+    const logout=()=>{
+
+    localStorage.removeItem("token");
+
+    localStorage.removeItem("user");
+
+    window.location.href="/login";
+
+}
 
 
     return (

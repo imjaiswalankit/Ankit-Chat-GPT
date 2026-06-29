@@ -5,16 +5,8 @@ const getGeminiAPIResponse = async (message) =>{
         method: "POST",
         headers: {
             "content-Type" : "application/json",
-            // "Authorization": `Bearer ${process.env.GEMINI_API_KEY}`
         },
-        // body: JSON.stringify({
-        // model: "gemini-2.5-flash",
-        // messages: [{
-        //     role: "user",
-        //     content: "Hello!"
-        // }]
-        // })  
-        // gemini mein meesages k place par contents and parts use hota h
+   
          body: JSON.stringify({
           contents: [
         {

@@ -20,7 +20,8 @@ function ChatWindow(){
         const options = {
             method:"POST",
             headers:{
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                 Authorization: `Bearer ${localStorage.getItem("token")}`
             },
             body:JSON.stringify({
                 message: prompt,
@@ -61,7 +62,17 @@ useEffect (() =>{
 
 const handleProfileClick  = () => {
     setIsOpen(!isOpen);
-}
+};
+
+// logOut dropDown mein LogOut k liy
+
+const logout = () => {
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    window.location.href="/";
+};
 
    return (
     <div className="chatWindow">
@@ -79,7 +90,7 @@ const handleProfileClick  = () => {
             <div className="dropDown">
                 <div className="dropDownIteam"><i className="fa-solid fa-cloud-arrow-up"></i> Upgrade Plan</div>
                 <div className="dropDownIteam"><i className="fa-solid fa-gear"></i> Settings</div>
-                <div className="dropDownIteam"><i class="fa-solid fa-right-from-bracket"></i> Log out</div>
+                <div className="dropDownIteam" onClick={logout}><i class="fa-solid fa-right-from-bracket"></i> Log out</div>
 
             </div>
         }
@@ -90,10 +101,13 @@ const handleProfileClick  = () => {
 
      {/* loading img create jbb ko msg frontend se send and backend se aane mein jo time lag rhaa too ui dikhega loading ka */}
       
-        <PropagateLoader color="#fff" loading={loading}></PropagateLoader>  
+        <PropagateLoader className="loaderContainer" color="#fff" loading={loading}></PropagateLoader>  
+
 
          {/* jo user input de rhaa  */}
+
         <div className="chatInput">
+
                 <div className="inputBox">
                     <input placeholder="Ask anything"
                         value = {prompt}
