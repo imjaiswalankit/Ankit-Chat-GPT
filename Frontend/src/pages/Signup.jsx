@@ -49,7 +49,7 @@ function Signup() {
 
       <div className="auth-card">
 
-        <h1 className="logo">🤖 AJ Chat~GPT</h1>
+        <h1 className="logo">🤖 Ankit Chat~GPT</h1>
         <h2>Create your Account</h2>
         <p className="subtitle">Sign up to start chatting with AI</p>
 
