@@ -24,6 +24,10 @@ app.use(cors());
 app.use("/api",chatRoutes);
 app.use("/api/auth", authRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Ankit Chat GPT Backend is Running 🚀");
+});
+
 // Database Connection Function
 
 const connectDB = async () => {
