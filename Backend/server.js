@@ -17,9 +17,12 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());  // use for pars our incoming request (miiddle ware )frontend se aap fetch ka use karke JSON data bhejte ho, toh server ko wo data samajh nahi aata. Ye line server ko wo data parse (read) karne mein help karti hai. Agar ye line nahi likhoge, toh req.body humesha undefined milega.
+
 app.use(cors({
-    origin: "https://ankit-chatgpt-one.vercel.app",
-    credentials: true
+  origin: [
+    "https://ankit-chat-gpt.vercel.app"
+  ],
+  credentials: true
 }));
 
 // Routes
