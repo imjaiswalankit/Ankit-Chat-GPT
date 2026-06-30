@@ -1,5 +1,5 @@
 import "./Sidebar.css";
-import logo from "../assets/blacklogo.png";
+import logo from "./assets/blacklogo.png";
 import { useContext, useEffect } from "react";
 import { MyContext } from "./MyContext";
 import {v1 as uuidv1} from "uuid"; // starting  mein unique threadID create k liy
