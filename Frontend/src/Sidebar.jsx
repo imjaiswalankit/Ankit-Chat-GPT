@@ -1,8 +1,8 @@
 import "./Sidebar.css";
+import logo from "../assets/blacklogo.png";
 import { useContext, useEffect } from "react";
 import { MyContext } from "./MyContext";
 import {v1 as uuidv1} from "uuid"; // starting  mein unique threadID create k liy
-import logo from "../assets/blacklogo.png";
 
 
 function Sidebar(){
@@ -113,7 +113,7 @@ function Sidebar(){
           {/* new Chat button */}
 
             <button onClick={createNewChat}>
-              <img src="src/assets/blacklogo.png" alt="gpt logo" className="logo"></img>
+              <img src={logo} alt="gpt logo" className="logo"></img>
                <span><i className="fa-solid fa-pen-to-square"></i> </span>           
             </button>
             
